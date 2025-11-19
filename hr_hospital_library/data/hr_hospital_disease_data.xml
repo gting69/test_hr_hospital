@@ -1,0 +1,19 @@
+<odoo noupdate="1">
+    <record id="disease_type_data_1" model="hr.hospital.disease.type">
+        <field name="name">Influenza (Flu)</field>
+        <field name="code">J11</field>
+        <field name="description">Seasonal viral infection affecting the respiratory system.</field>
+    </record>
+
+    <record id="disease_type_data_2" model="hr.hospital.disease.type">
+        <field name="name">Essential Hypertension</field>
+        <field name="code">I10</field>
+        <field name="description">High blood pressure of unknown cause.</field>
+    </record>
+
+    <record id="disease_type_data_3" model="hr.hospital.disease.type">
+        <field name="name">Type 2 Diabetes Mellitus</field>
+        <field name="code">E11</field>
+        <field name="description">Chronic condition affecting blood sugar regulation.</field>
+    </record>
+</odoo>

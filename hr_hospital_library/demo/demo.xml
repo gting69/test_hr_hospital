@@ -1,0 +1,47 @@
+<odoo>
+    <data noupdate="1">
+
+        <record id="hr_hospital_library_doctor_1" model="hr.hospital.library.doctor">
+            <field name="name">Dr. Olena Kovalenko</field>
+            <field name="description">Cardiology Specialist</field>
+            <field name="date_of_birth">1980-03-10</field>
+            <field name="phone">+380671112233</field>
+        </record>
+
+        <record id="hr_hospital_library_doctor_2" model="hr.hospital.library.doctor">
+            <field name="name">Dr. Ivanenko Petro</field>
+            <field name="description">Pediatrician</field>
+            <field name="date_of_birth">1975-09-25</field>
+            <field name="phone">+380954445566</field>
+        </record>
+
+        <record id="hr_hospital_library_doctor_3" model="hr.hospital.library.doctor">
+            <field name="name">Dr. Mariya Melnyk</field>
+            <field name="description">Surgeon</field>
+            <field name="date_of_birth">1992-07-18</field>
+            <field name="phone">+380937778899</field>
+        </record>
+
+        <record id="hr_hospital_library_patient_1" model="hr.hospital.library.patient">
+            <field name="name">Andriy Shevchenko</field>
+            <field name="description">Known allergy to penicillin</field>
+            <field name="date_of_birth">1990-05-15</field>
+            <field name="phone">+3809756732</field>
+        </record>
+
+        <record id="hr_hospital_library_patient_2" model="hr.hospital.library.patient">
+            <field name="name">Halyna Boyko</field>
+            <field name="description">Known allergy to penicillin</field>
+            <field name="date_of_birth">1985-11-20</field>
+            <field name="phone">+3809758431</field>
+        </record>
+
+        <record id="hr_hospital_library_patient_3" model="hr.hospital.library.patient">
+            <field name="name">Yuriy Tkachenko</field>
+            <field name="description">Occasional insomnia</field>
+            <field name="date_of_birth">2001-01-01</field>
+            <field name="phone">+3807654289</field>
+        </record>
+
+    </data>
+</odoo>

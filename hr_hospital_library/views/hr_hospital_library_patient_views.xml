@@ -1,0 +1,45 @@
+<odoo>
+    <record id="hr_hospital_library_patient_tree" model="ir.ui.view">
+        <field name="name">hr.hospital.library.patient.tree ()</field>
+        <field name="model">hr.hospital.library.patient</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="date_of_birth"/>  <field name="phone"/>           </tree>
+        </field>
+    </record>
+
+    <record id="hr_hospital_library_patient_form" model="ir.ui.view">
+        <field name="name">hr.hospital.library.patient.form ()</field>
+        <field name="model">hr.hospital.library.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <header></header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+
+                        <group>
+                            <field name="date_of_birth"/> <field name="phone"/>           </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_hospital_library_patient_window" model="ir.actions.act_window">
+        <field name="name">Patient</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.hospital.library.patient</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="hr_hospital_library_menu_patient"
+              action="action_hr_hospital_library_patient_window"
+              parent="hr_hospital_library_menu_catalog"
+              name="Patient" sequence="150"/>
+</odoo>

@@ -1,0 +1,52 @@
+<odoo>
+    <record id="hr_hospital_library_visit_tree" model="ir.ui.view">
+        <field name="name">hr.hospital.library.visit.tree</field>
+        <field name="model">hr.hospital.library.visit</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="disease_type_id"/>  <field name="visit_datetime"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_hospital_library_visit_form" model="ir.ui.view">
+        <field name="name">hr.hospital.library.visit.form</field>
+        <field name="model">hr.hospital.library.visit</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="patient_id"/>
+                        </group>
+                        <group>
+                            <field name="doctor_id"/>
+                            <field name="visit_datetime"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="disease_type_id"/>
+                    </group>
+
+                    <field name="description"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_hospital_library_visit_window" model="ir.actions.act_window">
+        <field name="name">Patient Visits</field>
+        <field name="res_model">hr.hospital.library.visit</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="hr_hospital_library_menu_visit"
+          action="action_hr_hospital_library_visit_window"
+          parent="hr_hospital_library_menu_catalog"
+          name="Patient Visits" sequence="30"/>
+</odoo>
