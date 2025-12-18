@@ -21,11 +21,17 @@
 
         'data/hr_hospital_disease_data.xml',
 
-        'views/hr_hospital_library_menu.xml',
+        'views/contact_person_views.xml',
+        'views/doctor_specialty_views.xml',
+        'views/doctor_schedule_views.xml',
         'views/hr_hospital_library_doctor_views.xml',
         'views/hr_hospital_library_patient_views.xml',
         'views/hr_hospital_library_visit_views.xml',
         'views/hr_hospital_disease_type_views.xml',
+        'views/patient_doctor_history_views.xml',
+        'views/mass_reassign_doctor_wizard_views.xml',
+
+        'views/hr_hospital_library_menu.xml',
     ],
     'demo': [
         'demo/demo.xml',

@@ -1,14 +1,53 @@
 <odoo>
+    <menuitem id="hr_hospital_library_main_menu"
+              web_icon="hr_hospital_library,static/description/icon.png"
+              name="Hospital" sequence="300"/>
 
-  <menuitem id="hr_hospital_library_main_menu"
-            web_icon="hr_hospital_library,static/description/icon.png"
-            name="library" sequence="300"/>
+    <menuitem id="hr_hospital_library_menu_catalog"
+              parent="hr_hospital_library_main_menu"
+              name="Catalog" sequence="100"/>
 
-  <menuitem id="hr_hospital_library_menu_catalog"
-            parent="hr_hospital_library_main_menu"
-            name="Catalog" sequence="100"/>
+    <menuitem id="hr_hospital_library_menu_reporting"
+              parent="hr_hospital_library_main_menu"
+              name="Reporting" sequence="500"/>
 
-  <menuitem id="hr_hospital_library_menu_main_settings"
-            parent="hr_hospital_library_main_menu"
-            name="Settings" sequence="900"/>
+    <menuitem id="hr_hospital_library_menu_doctor"
+              parent="hr_hospital_library_menu_catalog"
+              action="action_hr_hospital_library_doctor_window"
+              name="Doctors" sequence="10"/>
+
+    <menuitem id="hr_hospital_library_menu_patient"
+              parent="hr_hospital_library_menu_catalog"
+              action="action_hr_hospital_library_patient_window"
+              name="Patients" sequence="20"/>
+
+    <menuitem id="hr_hospital_library_menu_contact_person"
+              parent="hr_hospital_library_menu_catalog"
+              action="action_contact_person_window"
+              name="Contact Persons" sequence="30"/>
+
+    <menuitem id="hr_hospital_library_menu_visit"
+              parent="hr_hospital_library_menu_catalog"
+              action="action_hr_hospital_library_visit_window"
+              name="Patient Visits" sequence="40"/>
+
+    <menuitem id="menu_doctor_specialty"
+              parent="hr_hospital_library_menu_catalog"
+              action="action_doctor_specialty_window"
+              name="Specialties" sequence="50"/>
+
+    <menuitem id="menu_doctor_schedule"
+              parent="hr_hospital_library_menu_catalog"
+              action="action_doctor_schedule_window"
+              name="Schedules" sequence="60"/>
+
+    <menuitem id="hr_hospital_library_menu_disease"
+              parent="hr_hospital_library_menu_catalog"
+              action="action_hr_hospital_disease_type_window"
+              name="Diseases" sequence="70"/>
+
+    <menuitem id="hr_hospital_library_menu_disease_report"
+              parent="hr_hospital_library_menu_reporting"
+              action="action_disease_report_wizard"
+              name="Disease Analysis" sequence="10"/>
 </odoo>

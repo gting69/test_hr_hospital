@@ -1,0 +1,20 @@
+<odoo>
+    <record id="doctor_specialty_tree" model="ir.ui.view">
+        <field name="name">doctor.specialty.tree</field>
+        <field name="model">doctor.specialty</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_doctor_specialty_window" model="ir.actions.act_window">
+        <field name="name">Doctor Specialties</field>
+        <field name="res_model">doctor.specialty</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
