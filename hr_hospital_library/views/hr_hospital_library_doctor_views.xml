@@ -1,75 +1,135 @@
 <odoo>
-    <record id="hr_hospital_library_doctor_tree" model="ir.ui.view">
+    <record
+            id="hr_hospital_library_doctor_tree"
+            model="ir.ui.view">
         <field name="name">hr.hospital.library.doctor.tree</field>
         <field name="model">hr.hospital.library.doctor</field>
-        <field name="arch" type="xml">
+        <field
+                name="arch"
+                type="xml">
             <tree>
-                <field name="display_name" string="Name"/>
-                <field name="specialty_id"/>
-                <field name="phone"/>
-                <field name="experience"/>
-                <field name="rating"/>
+                <field
+                        name="display_name"
+                        string="Name"/>
+                <field
+                        name="specialty_id"/>
+                <field
+                        name="phone"/>
+                <field
+                        name="experience"/>
+                <field
+                        name="rating"/>
             </tree>
         </field>
     </record>
 
-    <record id="hr_hospital_library_doctor_form" model="ir.ui.view">
+    <record
+            id="hr_hospital_library_doctor_form"
+            model="ir.ui.view">
         <field name="name">hr.hospital.library.doctor.form</field>
         <field name="model">hr.hospital.library.doctor</field>
-        <field name="arch" type="xml">
+        <field
+                name="arch"
+                type="xml">
             <form>
                 <sheet>
-                    <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_128'}"/>
-                    <div class="oe_title">
+                    <field
+                            name="image_1920"
+                            widget="image"
+                            class="oe_avatar"
+                            options="{'preview_image': 'image_128'}"/>
+                    <div
+                            class="oe_title">
                         <h1>
-                            <field name="last_name" placeholder="Last Name" style="margin-right: 10px;"/>
-                            <field name="first_name" placeholder="First Name" style="margin-right: 10px;"/>
-                            <field name="middle_name" placeholder="Middle Name"/>
+                            <field
+                                    name="last_name"
+                                    placeholder="Last Name"
+                                    style="margin-right: 10px;"/>
+                            <field
+                                    name="first_name"
+                                    placeholder="First Name"
+                                    style="margin-right: 10px;"/>
+                            <field
+                                    name="middle_name"
+                                    placeholder="Middle Name"/>
                         </h1>
                     </div>
                     <group>
-                        <group string="Personal Information">
-                            <field name="birth_date"/>
-                            <field name="age"/>
-                            <field name="gender"/>
-                            <field name="country_id"/>
+                        <group
+                                string="Personal Information">
+                            <field
+                                    name="birth_date"/>
+                            <field
+                                    name="age"/>
+                            <field
+                                    name="gender"/>
+                            <field
+                                    name="country_id"/>
                         </group>
-                        <group string="Contacts">
-                            <field name="phone"/>
-                            <field name="email"/>
-                            <field name="lang_id"/>
-                            <field name="user_id"/>
-                        </group>
-                    </group>
-
-                    <group string="Professional Info">
-                        <group>
-                            <field name="license_number"/>
-                            <field name="license_date"/>
-                            <field name="experience"/>
-                            <field name="specialty_id"/>
-                        </group>
-                        <group>
-                            <field name="is_intern"/>
-                            <field name="mentor_id" invisible="not is_intern" required="is_intern"/>
-                            <field name="rating"/>
-                            <field name="education_country_id"/>
+                        <group
+                                string="Contacts">
+                            <field
+                                    name="phone"/>
+                            <field
+                                    name="email"/>
+                            <field
+                                    name="lang_id"/>
+                            <field
+                                    name="user_id"/>
                         </group>
                     </group>
-
+                    <group
+                            string="Professional Info">
+                        <group>
+                            <field
+                                    name="license_number"/>
+                            <field
+                                    name="license_date"/>
+                            <field
+                                    name="experience"/>
+                            <field
+                                    name="specialty_id"/>
+                        </group>
+                        <group>
+                            <field
+                                    name="is_intern"/>
+                            <field
+                                    name="mentor_id"
+                                    invisible="not is_intern"
+                                    required="is_intern"/>
+                            <field
+                                    name="rating"/>
+                            <field
+                                    name="education_country_id"/>
+                        </group>
+                    </group>
                     <notebook>
-                        <page string="Schedule" name="schedule">
-                            <field name="schedule_ids">
-                                <tree editable="bottom">
-                                    <field name="day_of_week"/>
-                                    <field name="start_hour" widget="float_time"/>
-                                    <field name="end_hour" widget="float_time"/>
-                                    <field name="schedule_type"/>
+                        <page
+                                string="Schedule"
+                                name="schedule">
+                            <field
+                                    name="schedule_ids">
+                                <tree
+                                        editable="bottom">
+                                    <field
+                                            name="day_of_week"/>
+                                    <field
+                                            name="start_hour"
+                                            widget="float_time"/>
+                                    <field
+                                            name="end_hour"
+                                            widget="float_time"/>
+                                    <field
+                                            name="schedule_type"/>
                                 </tree>
                             </field>
                         </page>
-                        <page string="Description" name="description">
-                            <field name="description" placeholder="Doctor's notes..."/>
+                        <page
+                                string="Description"
+                                name="description">
+                            <field
+                                    name="description"
+                                    placeholder="Doctor's notes..."/>
                         </page>
                     </notebook>
                 </sheet>
@@ -77,10 +137,11 @@
         </field>
     </record>
 
-    <record id="action_hr_hospital_library_doctor_window" model="ir.actions.act_window">
+    <record
+            id="action_hr_hospital_library_doctor_window"
+            model="ir.actions.act_window">
         <field name="name">Doctors</field>
         <field name="res_model">hr.hospital.library.doctor</field>
         <field name="view_mode">tree,form</field>
     </record>
-
 </odoo>

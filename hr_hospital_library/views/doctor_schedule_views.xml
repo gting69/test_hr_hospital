@@ -1,23 +1,38 @@
 <odoo>
-    <record id="doctor_schedule_tree" model="ir.ui.view">
+    <record
+            id="doctor_schedule_tree"
+            model="ir.ui.view">
         <field name="name">doctor.schedule.tree</field>
         <field name="model">doctor.schedule</field>
-        <field name="arch" type="xml">
-            <tree decoration-info="schedule_type == 'work'" decoration-warning="schedule_type == 'vacation'">
-                <field name="doctor_id"/>
-                <field name="day_of_week"/>
-                <field name="date"/>
-                <field name="start_hour" widget="float_time"/>
-                <field name="end_hour" widget="float_time"/>
-                <field name="schedule_type"/>
+        <field
+                name="arch"
+                type="xml">
+            <tree
+                    decoration-info="schedule_type == 'work'"
+                    decoration-warning="schedule_type == 'vacation'">
+                <field
+                        name="doctor_id"/>
+                <field
+                        name="day_of_week"/>
+                <field
+                        name="date"/>
+                <field
+                        name="start_hour"
+                        widget="float_time"/>
+                <field
+                        name="end_hour"
+                        widget="float_time"/>
+                <field
+                        name="schedule_type"/>
             </tree>
         </field>
     </record>
 
-    <record id="action_doctor_schedule_window" model="ir.actions.act_window">
+    <record
+            id="action_doctor_schedule_window"
+            model="ir.actions.act_window">
         <field name="name">Doctor Schedule</field>
         <field name="res_model">doctor.schedule</field>
         <field name="view_mode">tree,form</field>
     </record>
-
 </odoo>

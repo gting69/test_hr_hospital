@@ -1,45 +1,61 @@
 <odoo>
-    <record id="contact_person_tree" model="ir.ui.view">
+    <record
+            id="contact_person_tree"
+            model="ir.ui.view">
         <field name="name">contact.person.tree</field>
         <field name="model">contact.person</field>
-        <field name="arch" type="xml">
+        <field
+                name="arch"
+                type="xml">
             <tree>
-                <field name="display_name"/>
-                <field name="relation"/>
-                <field name="phone"/>
+                <field
+                        name="display_name"/>
+                <field
+                        name="relation"/>
+                <field
+                        name="phone"/>
             </tree>
         </field>
     </record>
 
-    <record id="contact_person_form" model="ir.ui.view">
+    <record
+            id="contact_person_form"
+            model="ir.ui.view">
         <field name="name">contact.person.form</field>
         <field name="model">contact.person</field>
-        <field name="arch" type="xml">
+        <field
+                name="arch"
+                type="xml">
             <form>
                 <sheet>
-                    <div class="oe_title">
-                        <h1><field name="display_name" readonly="1"/></h1>
+                    <div
+                            class="oe_title">
+                        <h1>
+                            <field
+                                    name="display_name"
+                                    readonly="1"/>
+                        </h1>
                     </div>
                     <group>
                         <group>
-                            <field name="last_name"/>
-                            <field name="first_name"/>
-                            <field name="middle_name"/>
-                            <field name="relation"/>
+                            <field
+                                    name="last_name"/>
+                            <field
+                                    name="first_name"/>
+                            <field
+                                    name="middle_name"/>
+                            <field
+                                    name="relation"/>
                         </group>
                         <group>
-                            <field name="phone"/>
-                            <field name="email"/>
+                            <field
+                                    name="phone"/>
+                            <field
+                                    name="email"/>
                         </group>
                     </group>
                 </sheet>
             </form>
         </field>
-    </record>
-
-    <record id="action_contact_person_window" model="ir.actions.act_window">
-        <field name="name">Contact Persons</field>
-        <field name="res_model">contact.person</field>
-        <field name="view_mode">tree,form</field>
     </record>
 </odoo>

@@ -1,65 +1,114 @@
 <odoo>
-    <record id="hr_hospital_library_patient_tree" model="ir.ui.view">
+    <record
+            id="hr_hospital_library_patient_tree"
+            model="ir.ui.view">
         <field name="name">hr.hospital.library.patient.tree</field>
         <field name="model">hr.hospital.library.patient</field>
-        <field name="arch" type="xml">
+        <field
+                name="arch"
+                type="xml">
             <tree>
-                <field name="display_name" string="Patient Name"/>
-                <field name="personal_doctor_id"/>
-                <field name="blood_group"/>
-                <field name="blood_rh"/>
-                <field name="phone"/>
+                <field
+                        name="display_name"
+                        string="Patient Name"/>
+                <field
+                        name="personal_doctor_id"/>
+                <field
+                        name="blood_group"/>
+                <field
+                        name="blood_rh"/>
+                <field
+                        name="phone"/>
             </tree>
         </field>
     </record>
 
-    <record id="hr_hospital_library_patient_form" model="ir.ui.view">
+    <record
+            id="hr_hospital_library_patient_form"
+            model="ir.ui.view">
         <field name="name">hr.hospital.library.patient.form</field>
         <field name="model">hr.hospital.library.patient</field>
-        <field name="arch" type="xml">
+        <field
+                name="arch"
+                type="xml">
             <form>
                 <sheet>
-                    <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_128'}"/>
-                    <div class="oe_title">
+                    <field
+                            name="image_1920"
+                            widget="image"
+                            class="oe_avatar"
+                            options="{'preview_image': 'image_128'}"/>
+                    <div
+                            class="oe_title">
                         <h1>
-                            <field name="last_name" placeholder="Last Name" style="margin-right: 10px;"/>
-                            <field name="first_name" placeholder="First Name" style="margin-right: 10px;"/>
-                            <field name="middle_name" placeholder="Middle Name"/>
+                            <field
+                                    name="last_name"
+                                    placeholder="Last Name"
+                                    style="margin-right: 10px;"/>
+                            <field
+                                    name="first_name"
+                                    placeholder="First Name"
+                                    style="margin-right: 10px;"/>
+                            <field
+                                    name="middle_name"
+                                    placeholder="Middle Name"/>
                         </h1>
                     </div>
                     <group>
-                        <group string="Main Info">
-                            <field name="birth_date"/>
-                            <field name="age"/>
-                            <field name="gender"/>
-                            <field name="personal_doctor_id"/>
+                        <group
+                                string="Main Info">
+                            <field
+                                    name="birth_date"/>
+                            <field
+                                    name="age"/>
+                            <field
+                                    name="gender"/>
+                            <field
+                                    name="personal_doctor_id"/>
                         </group>
-                        <group string="Localization &amp; ID">
-                            <field name="phone"/>
-                            <field name="email"/>
-                            <field name="passport_data"/>
-                            <field name="country_id"/>
-                        </group>
-                    </group>
-
-                    <group string="Medical Information">
-                        <group>
-                            <field name="blood_group"/>
-                            <field name="blood_rh"/>
-                            <field name="contact_person_id"/>
-                        </group>
-                        <group>
-                            <field name="insurance_company_id"/>
-                            <field name="insurance_policy_number"/>
+                        <group
+                                string="Localization &amp; ID">
+                            <field
+                                    name="phone"/>
+                            <field
+                                    name="email"/>
+                            <field
+                                    name="passport_data"/>
+                            <field
+                                    name="country_id"/>
                         </group>
                     </group>
-
+                    <group
+                            string="Medical Information">
+                        <group>
+                            <field
+                                    name="blood_group"/>
+                            <field
+                                    name="blood_rh"/>
+                            <field
+                                    name="contact_person_id"/>
+                        </group>
+                        <group>
+                            <field
+                                    name="insurance_company_id"/>
+                            <field
+                                    name="insurance_policy_number"/>
+                        </group>
+                    </group>
                     <notebook>
-                        <page string="Allergies" name="allergies">
-                            <field name="allergies" placeholder="Describe allergies here..."/>
+                        <page
+                                string="Allergies"
+                                name="allergies">
+                            <field
+                                    name="allergies"
+                                    placeholder="Describe allergies here..."/>
                         </page>
-                        <page string="Doctor History" name="doctor_history">
-                            <field name="doctor_history_ids" readonly="1"/>
+                        <page
+                                string="Doctor History"
+                                name="doctor_history">
+                            <field
+                                    name="doctor_history_ids"
+                                    readonly="1"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -67,10 +116,11 @@
         </field>
     </record>
 
-    <record id="action_hr_hospital_library_patient_window" model="ir.actions.act_window">
+    <record
+            id="action_hr_hospital_library_patient_window"
+            model="ir.actions.act_window">
         <field name="name">Patients</field>
         <field name="res_model">hr.hospital.library.patient</field>
         <field name="view_mode">tree,form</field>
     </record>
-
 </odoo>

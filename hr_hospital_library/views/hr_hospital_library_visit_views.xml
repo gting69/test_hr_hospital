@@ -1,57 +1,106 @@
 <odoo>
-    <record id="hr_hospital_library_visit_tree" model="ir.ui.view">
+    <record
+            id="hr_hospital_library_visit_tree"
+            model="ir.ui.view">
         <field name="name">hr.hospital.library.visit.tree</field>
         <field name="model">hr.hospital.library.visit</field>
-        <field name="arch" type="xml">
-            <tree decoration-info="state == 'planned'" decoration-success="state == 'completed'">
-                <field name="planned_datetime"/>
-                <field name="patient_id"/>
-                <field name="doctor_id"/>
-                <field name="visit_type"/>
-                <field name="state" widget="badge"/>
+        <field
+                name="arch"
+                type="xml">
+            <tree
+                    decoration-info="state == 'planned'"
+                    decoration-success="state == 'completed'">
+                <field
+                        name="planned_datetime"/>
+                <field
+                        name="patient_id"/>
+                <field
+                        name="doctor_id"/>
+                <field
+                        name="visit_type"/>
+                <field
+                        name="state"
+                        widget="badge"/>
             </tree>
         </field>
     </record>
 
-    <record id="hr_hospital_library_visit_form" model="ir.ui.view">
+    <record
+            id="hr_hospital_library_visit_form"
+            model="ir.ui.view">
         <field name="name">hr.hospital.library.visit.form</field>
         <field name="model">hr.hospital.library.visit</field>
-        <field name="arch" type="xml">
+        <field
+                name="arch"
+                type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                    <field
+                            name="state"
+                            widget="statusbar"
+                            options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
-                    <div class="oe_title">
-                        <h1><field name="name" placeholder="Reason for visit..."/></h1>
+                    <div
+                            class="oe_title">
+                        <h1>
+                            <field
+                                    name="name"
+                                    placeholder="Reason for visit..."/>
+                        </h1>
                     </div>
                     <group>
-                        <group string="Participants">
-                            <field name="patient_id"/>
-                            <field name="doctor_id"/>
-                            <field name="visit_type"/>
+                        <group
+                                string="Participants">
+                            <field
+                                    name="patient_id"/>
+                            <field
+                                    name="doctor_id"/>
+                            <field
+                                    name="visit_type"/>
                         </group>
-                        <group string="Timing">
-                            <field name="planned_datetime"/>
-                            <field name="actual_datetime" readonly="state != 'completed'" required="state == 'completed'"/>
+                        <group
+                                string="Timing">
+                            <field
+                                    name="planned_datetime"/>
+                            <field
+                                    name="actual_datetime"
+                                    readonly="state != 'completed'"
+                                    required="state == 'completed'"/>
                         </group>
                     </group>
-                    <group string="Financials">
-                        <field name="currency_id" invisible="1"/>
-                        <field name="visit_cost" widget="monetary"/>
+                    <group
+                            string="Financials">
+                        <field
+                                name="currency_id"
+                                invisible="1"/>
+                        <field
+                                name="visit_cost"
+                                widget="monetary"/>
                     </group>
                     <notebook>
-                        <page string="Diagnoses" name="diagnoses">
-                            <field name="diagnosis_ids">
-                                <tree editable="bottom">
-                                    <field name="disease_id"/>
-                                    <field name="severity"/>
-                                    <field name="is_approved"/>
+                        <page
+                                string="Diagnoses"
+                                name="diagnoses">
+                            <field
+                                    name="diagnosis_ids">
+                                <tree
+                                        editable="bottom">
+                                    <field
+                                            name="disease_id"/>
+                                    <field
+                                            name="severity"/>
+                                    <field
+                                            name="is_approved"/>
                                 </tree>
                             </field>
                         </page>
-                        <page string="Recommendations" name="recommendations">
-                            <field name="recommendations" widget="html"/>
+                        <page
+                                string="Recommendations"
+                                name="recommendations">
+                            <field
+                                    name="recommendations"
+                                    widget="html"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -59,7 +108,9 @@
         </field>
     </record>
 
-    <record id="action_hr_hospital_library_visit_window" model="ir.actions.act_window">
+    <record
+            id="action_hr_hospital_library_visit_window"
+            model="ir.actions.act_window">
         <field name="name">Patient Visits</field>
         <field name="res_model">hr.hospital.library.visit</field>
         <field name="view_mode">tree,form</field>
