@@ -6,7 +6,6 @@ class DoctorSpecialty(models.Model):
     _description = 'Doctor Specialty'
 
     name = fields.Char(
-        string='Name',
         required=True,
     )
     code = fields.Char(
@@ -14,11 +13,8 @@ class DoctorSpecialty(models.Model):
         size=10,
         required=True,
     )
-    description = fields.Text(
-        string='Description',
-    )
+    description = fields.Text()
     active = fields.Boolean(
-        string='Active',
         default=True,
     )
 

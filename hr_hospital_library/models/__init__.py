@@ -1,10 +1,10 @@
-from . import person
-from . import contact_person
-from . import doctor_specialty
-from . import medical_diagnosis
-from . import doctor_schedule
-from . import patient_doctor_history
-from . import hr_hospital_library_doctor
-from . import hr_hospital_library_patient
-from . import hr_hospital_library_visit
-from . import hr_hospital_disease_type
+from . import person  # noqa: F401
+from . import contact_person  # noqa: F401
+from . import doctor_specialty  # noqa: F401
+from . import medical_diagnosis  # noqa: F401
+from . import doctor_schedule  # noqa: F401
+from . import patient_doctor_history  # noqa: F401
+from . import hr_hospital_library_doctor  # noqa: F401
+from . import hr_hospital_library_patient  # noqa: F401
+from . import hr_hospital_library_visit  # noqa: F401
+from . import hr_hospital_disease_type  # noqa: F401

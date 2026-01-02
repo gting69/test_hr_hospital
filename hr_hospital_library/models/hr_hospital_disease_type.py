@@ -20,9 +20,7 @@ class HrHospitalDiseaseType(models.Model):
         inverse_name='parent_id',
         string='Child Diseases',
     )
-    icd_10_code = fields.Char(
-        string='ICD-10 Code',
-        size=10,
+    icd_10_code = fields.Char(size=10)
     )
     severity_level = fields.Selection(
         selection=[
@@ -35,12 +33,9 @@ class HrHospitalDiseaseType(models.Model):
         default='low',
     )
     is_contagious = fields.Boolean(
-        string='Is Contagious',
         default=False,
     )
-    symptoms = fields.Text(
-        string='Symptoms',
-    )
+    symptoms = fields.Text()
     country_ids = fields.Many2many(
         comodel_name='res.country',
         relation='disease_type_country_rel',

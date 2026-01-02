@@ -1,8 +1,6 @@
-import re
 import logging
 from datetime import timedelta
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -22,11 +20,9 @@ class MassReassignDoctorWizard(models.TransientModel):
     )
     patient_ids = fields.Many2many(
         comodel_name='hr.hospital.library.patient',
-        string='Patients',
         required=True,
     )
     change_date = fields.Date(
-        string='Change Date',
         default=fields.Date.today,
     )
     reason = fields.Text(
@@ -37,7 +33,8 @@ class MassReassignDoctorWizard(models.TransientModel):
     @api.model
     def default_get(self, fields_list):
         res = super().default_get(fields_list)
-        if self.env.context.get('active_model') == 'hr.hospital.library.patient':
+        if (self.env.context.get('active_model') ==
+                'hr.hospital.library.patient'):
             active_ids = self.env.context.get('active_ids')
             res.update({
                 'patient_ids': [(6, 0, active_ids)]
@@ -65,12 +62,8 @@ class RescheduleVisitWizard(models.TransientModel):
         comodel_name='hr.hospital.library.doctor',
         string='New Doctor',
     )
-    new_date = fields.Date(
-        string='New Date',
-        required=True,
-    )
+    new_date = fields.Date(required=True)
     new_time = fields.Float(
-        string='New Time',
         required=True,
     )
     reason = fields.Text(
@@ -80,12 +73,10 @@ class RescheduleVisitWizard(models.TransientModel):
 
     def action_reschedule(self):
         self.visit_id.state = 'cancelled'
-
         new_datetime = (
             fields.Datetime.to_datetime(self.new_date) +
             timedelta(hours=self.new_time)
         )
-
         self.env['hr.hospital.library.visit'].create({
             'name': _("Rescheduled: %s") % self.visit_id.name,
             'patient_id': self.visit_id.patient_id.id,
@@ -102,24 +93,15 @@ class DiseaseReportWizard(models.TransientModel):
 
     doctor_ids = fields.Many2many(
         comodel_name='hr.hospital.library.doctor',
-        string='Doctors',
     )
     disease_ids = fields.Many2many(
         comodel_name='hr.hospital.disease.type',
-        string='Diseases',
     )
     country_ids = fields.Many2many(
         comodel_name='res.country',
-        string='Countries',
     )
-    start_date = fields.Date(
-        string='Start Date',
-        required=True,
-    )
-    end_date = fields.Date(
-        string='End Date',
-        required=True,
-    )
+    start_date = fields.Date(required=True)
+    end_date = fields.Date(required=True)
     report_type = fields.Selection(
         selection=[
             ('detail', 'Detailed'),
@@ -132,7 +114,6 @@ class DiseaseReportWizard(models.TransientModel):
             ('doctor', 'By Doctor'),
             ('disease', 'By Disease'),
         ],
-        string='Group By',
     )
 
     def action_generate_report(self):
@@ -164,15 +145,10 @@ class DoctorScheduleWizard(models.TransientModel):
 
     doctor_id = fields.Many2one(
         comodel_name='hr.hospital.library.doctor',
-        string='Doctor',
         required=True,
     )
-    start_week = fields.Date(
-        string='Start Week',
-        required=True,
-    )
+    start_week = fields.Date(required=True)
     weeks_count = fields.Integer(
-        string='Weeks Count',
         default=1,
         required=True,
     )
@@ -183,12 +159,8 @@ class DoctorScheduleWizard(models.TransientModel):
     friday = fields.Boolean(string='Fri')
     saturday = fields.Boolean(string='Sat')
     sunday = fields.Boolean(string='Sun')
-    start_hour = fields.Float(
-        string='Start Hour',
-    )
-    end_hour = fields.Float(
-        string='End Hour',
-    )
+    start_hour = fields.Float()
+    end_hour = fields.Float()
 
     def action_generate_schedule(self):
         self.ensure_one()
@@ -226,21 +198,14 @@ class PatientCardExportWizard(models.TransientModel):
 
     patient_id = fields.Many2one(
         comodel_name='hr.hospital.library.patient',
-        string='Patient',
         required=True,
     )
-    start_date = fields.Date(
-        string='Start Date',
-    )
-    end_date = fields.Date(
-        string='End Date',
-    )
+    start_date = fields.Date()
+    end_date = fields.Date()
     include_diagnoses = fields.Boolean(
-        string='Include Diagnoses',
         default=True,
     )
     include_recommendations = fields.Boolean(
-        string='Include Recommendations',
         default=True,
     )
     export_format = fields.Selection(
@@ -248,7 +213,6 @@ class PatientCardExportWizard(models.TransientModel):
             ('json', 'JSON'),
             ('csv', 'CSV'),
         ],
-        string='Export Format',
         default='json',
         required=True,
     )

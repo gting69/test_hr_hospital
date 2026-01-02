@@ -1,6 +1,6 @@
 import logging
 from datetime import date
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -24,7 +24,6 @@ class HrHospitalLibraryDoctor(models.Model):
         string='Specialty',
     )
     is_intern = fields.Boolean(
-        string='Is Intern',
         default=False,
     )
     mentor_id = fields.Many2one(
@@ -33,7 +32,6 @@ class HrHospitalLibraryDoctor(models.Model):
         domain=[('is_intern', '=', False)],
     )
     license_number = fields.Char(
-        string='License Number',
         required=True,
         copy=False,
     )
@@ -46,7 +44,6 @@ class HrHospitalLibraryDoctor(models.Model):
         store=True,
     )
     rating = fields.Float(
-        string='Rating',
         digits=(3, 2),
     )
     education_country_id = fields.Many2one(
@@ -110,11 +107,11 @@ class HrHospitalLibraryDoctor(models.Model):
             if rec.mentor_id:
                 if rec.mentor_id == rec:
                     raise ValidationError(
-                        "A doctor cannot be their own mentor!"
+                        _("A doctor cannot be their own mentor!")
                     )
                 if rec.mentor_id.is_intern:
                     raise ValidationError(
-                        "An intern cannot be chosen as a mentor!"
+                        _("An intern cannot be chosen as a mentor!")
                     )
 
     @api.constrains('rating')
@@ -122,18 +119,20 @@ class HrHospitalLibraryDoctor(models.Model):
         for rec in self:
             if rec.rating < 0 or rec.rating > 5:
                 raise ValidationError(
-                    "The rating must be between 0.00 and 5.00!"
+                    _("The rating must be between 0.00 and 5.00!")
                 )
 
     def toggle_active(self):
         for rec in self:
             if rec.active:
-                active_visits = self.env['hr.hospital.library.visit'].search_count([
+                active_visits = self.env[
+                    'hr.hospital.library.visit'
+                ].search_count([
                     ('doctor_id', '=', rec.id),
                     ('state', '=', 'planned'),
                 ])
                 if active_visits > 0:
                     raise ValidationError(
-                        "Cannot archive a doctor with planned visits!"
+                        _("Cannot archive a doctor with planned visits!")
                     )
         return super().toggle_active()

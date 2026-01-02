@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 
@@ -36,7 +36,6 @@ class MedicalDiagnosis(models.Model):
         readonly=True,
     )
     approval_date = fields.Datetime(
-        string='Approval Date',
         readonly=True,
     )
     severity = fields.Selection(
@@ -46,7 +45,6 @@ class MedicalDiagnosis(models.Model):
             ('severe', 'Severe'),
             ('critical', 'Critical'),
         ],
-        string='Severity',
     )
 
     @api.constrains('approval_date', 'visit_id')
@@ -54,9 +52,9 @@ class MedicalDiagnosis(models.Model):
         for rec in self:
             if rec.approval_date and rec.visit_id.planned_datetime:
                 if rec.approval_date < rec.visit_id.planned_datetime:
-                    raise ValidationError(
+                    raise ValidationError(_(
                         "Дата затвердження не може бути раніше дати візиту!"
-                    )
+                    ))
 
     def action_approve(self):
         for rec in self:

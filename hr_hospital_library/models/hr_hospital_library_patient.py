@@ -17,9 +17,7 @@ class HrHospitalLibraryPatient(models.Model):
         comodel_name='hr.hospital.library.doctor',
         string='Personal Doctor',
     )
-    passport_data = fields.Char(
-        string='Passport Data',
-        size=10,
+    passport_data = fields.Char(size=10)
     )
     contact_person_id = fields.Many2one(
         comodel_name='contact.person',
@@ -41,19 +39,15 @@ class HrHospitalLibraryPatient(models.Model):
         ],
         string='Rh Factor',
     )
-    allergies = fields.Text(
-        string='Allergies',
-    )
+    allergies = fields.Text()
     insurance_company_id = fields.Many2one(
         comodel_name='res.partner',
         string='Insurance Company',
         domain=[('is_company', '=', True)],
     )
-    insurance_policy_number = fields.Char(
-        string='Insurance Policy Number',
-    )
+    insurance_policy_number = fields.Char()
     doctor_history_ids = fields.One2many(
-        comodel_name='patient.doctor.history',
+        comodel_name='patient.doctor_history',
         inverse_name='patient_id',
         string='Doctor History',
     )

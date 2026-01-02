@@ -30,7 +30,6 @@
         'views/hr_hospital_disease_type_views.xml',
         'views/patient_doctor_history_views.xml',
         'views/mass_reassign_doctor_wizard_views.xml',
-
         'views/hr_hospital_library_menu.xml',
     ],
     'demo': [

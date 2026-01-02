@@ -1,6 +1,5 @@
 import logging
-from datetime import timedelta
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -44,27 +43,20 @@ class HrHospitalLibraryVisit(models.Model):
             ('preventive', 'Preventive'),
             ('urgent', 'Urgent'),
         ],
-        string='Visit Type',
     )
     planned_datetime = fields.Datetime(
         string="Planned Date/Time",
         required=True,
     )
-    actual_datetime = fields.Datetime(
-        string="Actual Date/Time",
-    )
-    diagnosis_ids = fields.One2many(
+    actual_datetime = fields.Datetime())
         comodel_name='medical.diagnosis',
         inverse_name='visit_id',
         string='Diagnoses',
     )
     diagnoses_count = fields.Integer(
-        string='Diagnoses Count',
         compute='_compute_diagnoses_count',
     )
-    recommendations = fields.Html(
-        string='Recommendations',
-    )
+    recommendations = fields.Html()
     visit_cost = fields.Monetary(
         string='Visit Cost',
         currency_field='currency_id',
@@ -85,10 +77,11 @@ class HrHospitalLibraryVisit(models.Model):
         if self.patient_id and self.patient_id.allergies:
             return {
                 'warning': {
-                    'title': "Patient Allergy Warning!",
+                    'title': _("Patient Allergy Warning!"),
                     'message': self.patient_id.allergies,
                 }
             }
+        return {}
 
     @api.constrains('patient_id', 'doctor_id', 'planned_datetime')
     def _check_duplicate_visits(self):
@@ -110,33 +103,32 @@ class HrHospitalLibraryVisit(models.Model):
             ])
             if duplicate_count > 0:
                 raise ValidationError(
-                    "This patient is already scheduled for this doctor today!"
+                    _("This patient is already scheduled for this doctor today!")
                 )
 
     @api.onchange('patient_id')
     def _onchange_patient_country_filter(self):
         if self.patient_id and self.patient_id.country_id:
-            return {
-                'domain': {
-                    'doctor_id': [
-                        ('education_country_id', '=', self.patient_id.country_id.id)
-                    ]
-                }
-            }
+            domain = [
+                ('education_country_id', '=', self.patient_id.country_id.id)
+            ]
+            return {'domain': {'doctor_id': domain}}
+        return {}
 
     def write(self, vals):
         protected_fields = ['doctor_id', 'patient_id', 'planned_datetime']
         for rec in self:
-            if rec.state == 'completed' and any(f in vals for f in protected_fields):
+            if (rec.state == 'completed' and
+                    any(f in vals for f in protected_fields)):
                 raise ValidationError(
-                    "You cannot change the doctor, patient, or date of a completed visit!"
+                    _("You cannot change parameters of a completed visit!")
                 )
-        return super().write(vals)
+        return super(HrHospitalLibraryVisit, self).write(vals)
 
     def unlink(self):
         for rec in self:
             if rec.diagnosis_ids:
                 raise ValidationError(
-                    "You cannot delete a visit that already has diagnoses!"
+                    _("You cannot delete a visit that already has diagnoses!")
                 )
-        return super().unlink()
+        return super(HrHospitalLibraryVisit, self).unlink()

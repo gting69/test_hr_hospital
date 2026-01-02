@@ -8,22 +8,17 @@ class PatientDoctorHistory(models.Model):
 
     patient_id = fields.Many2one(
         comodel_name='hr.hospital.library.patient',
-        string='Patient',
         required=True,
     )
     doctor_id = fields.Many2one(
         comodel_name='hr.hospital.library.doctor',
-        string='Doctor',
         required=True,
     )
     appointment_date = fields.Date(
-        string='Appointment Date',
         required=True,
         default=fields.Date.today,
     )
-    change_date = fields.Date(
-        string='Change Date',
-    )
+    change_date = fields.Date()
     reason = fields.Text(
         string='Reason for Change',
     )

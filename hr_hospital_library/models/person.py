@@ -10,40 +10,30 @@ class AbstractPerson(models.Model):
     _inherit = ['image.mixin']
 
     last_name = fields.Char(
-        string='Last Name',
         required=True,
     )
     first_name = fields.Char(
-        string='First Name',
         required=True,
     )
-    middle_name = fields.Char(
-        string='Middle Name',
-    )
+    middle_name = fields.Char()
     display_name = fields.Char(
         compute='_compute_display_name',
         store=True,
     )
-    phone = fields.Char(
-        string='Phone',
-    )
-    email = fields.Char(
-        string='Email',
-    )
+    phone = fields.Char()
+    email = fields.Char()
     gender = fields.Selection(
         selection=[
             ('male', 'Male'),
             ('female', 'Female'),
             ('other', 'Other'),
         ],
-        string='Gender',
         default='other',
     )
     birth_date = fields.Date(
         string='Date of Birth',
     )
     age = fields.Integer(
-        string='Age',
         compute='_compute_age',
         store=True,
     )
@@ -63,7 +53,7 @@ class AbstractPerson(models.Model):
             rec.display_name = " ".join(filter(None, name_parts))
 
     @api.depends('birth_date')
-    def _compute_experience(self):
+    def _compute_age(self):  # Виправлено назву методу згідно з полем
         today = date.today()
         for rec in self:
             if rec.birth_date:

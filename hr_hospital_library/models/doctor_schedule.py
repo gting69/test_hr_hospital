@@ -7,7 +7,6 @@ class DoctorSchedule(models.Model):
 
     doctor_id = fields.Many2one(
         comodel_name='hr.hospital.library.doctor',
-        string='Doctor',
         required=True,
     )
     day_of_week = fields.Selection(
@@ -22,9 +21,7 @@ class DoctorSchedule(models.Model):
         ],
         string='Day of Week',
     )
-    date = fields.Date(
-        string='Specific Date',
-    )
+    date = fields.Date()
     start_hour = fields.Float(
         string='Start Time',
     )
@@ -41,9 +38,7 @@ class DoctorSchedule(models.Model):
         string='Type',
         default='work',
     )
-    notes = fields.Char(
-        string='Notes',
-    )
+    notes = fields.Char()
 
     _sql_constraints = [
         (
