@@ -74,8 +74,8 @@ class RescheduleVisitWizard(models.TransientModel):
     def action_reschedule(self):
         self.visit_id.state = 'cancelled'
         new_datetime = (
-            fields.Datetime.to_datetime(self.new_date) +
-            timedelta(hours=self.new_time)
+                fields.Datetime.to_datetime(self.new_date) +
+                timedelta(hours=self.new_time)
         )
         self.env['hr.hospital.library.visit'].create({
             'name': _("Rescheduled: %s") % self.visit_id.name,
@@ -85,58 +85,6 @@ class RescheduleVisitWizard(models.TransientModel):
             'visit_type': self.visit_id.visit_type,
         })
         return {'type': 'ir.actions.act_window_close'}
-
-
-class DiseaseReportWizard(models.TransientModel):
-    _name = 'disease.report.wizard'
-    _description = 'Disease Report Wizard'
-
-    doctor_ids = fields.Many2many(
-        comodel_name='hr.hospital.library.doctor',
-    )
-    disease_ids = fields.Many2many(
-        comodel_name='hr.hospital.disease.type',
-    )
-    country_ids = fields.Many2many(
-        comodel_name='res.country',
-    )
-    start_date = fields.Date(required=True)
-    end_date = fields.Date(required=True)
-    report_type = fields.Selection(
-        selection=[
-            ('detail', 'Detailed'),
-            ('summary', 'Summary'),
-        ],
-        default='detail',
-    )
-    group_by = fields.Selection(
-        selection=[
-            ('doctor', 'By Doctor'),
-            ('disease', 'By Disease'),
-        ],
-    )
-
-    def action_generate_report(self):
-        self.ensure_one()
-        domain = [
-            ('visit_id.planned_datetime', '>=', self.start_date),
-            ('visit_id.planned_datetime', '<=', self.end_date),
-        ]
-        if self.doctor_ids:
-            domain.append(('visit_id.doctor_id', 'in', self.doctor_ids.ids))
-        if self.disease_ids:
-            domain.append(('disease_id', 'in', self.disease_ids.ids))
-
-        return {
-            'name': _('Disease Analysis Result'),
-            'type': 'ir.actions.act_window',
-            'res_model': 'medical.diagnosis',
-            'view_mode': 'tree,form',
-            'domain': domain,
-            'context': {
-                'group_by': self.group_by or 'disease_id',
-            },
-        }
 
 
 class DoctorScheduleWizard(models.TransientModel):
@@ -165,12 +113,8 @@ class DoctorScheduleWizard(models.TransientModel):
     def action_generate_schedule(self):
         self.ensure_one()
         days_map = {
-            '0': self.monday,
-            '1': self.tuesday,
-            '2': self.wednesday,
-            '3': self.thursday,
-            '4': self.friday,
-            '5': self.saturday,
+            '0': self.monday, '1': self.tuesday, '2': self.wednesday,
+            '3': self.thursday, '4': self.friday, '5': self.saturday,
             '6': self.sunday,
         }
         selected_days = [day for day, active in days_map.items() if active]
@@ -178,8 +122,8 @@ class DoctorScheduleWizard(models.TransientModel):
         for week in range(self.weeks_count):
             for day_code in selected_days:
                 schedule_date = (
-                    self.start_week +
-                    timedelta(weeks=week, days=int(day_code))
+                        self.start_week +
+                        timedelta(weeks=week, days=int(day_code))
                 )
                 self.env['doctor.schedule'].create({
                     'doctor_id': self.doctor_id.id,

@@ -21,7 +21,6 @@ class HrHospitalLibraryVisit(models.Model):
     )
     doctor_id = fields.Many2one(
         comodel_name='hr.hospital.library.doctor',
-        string="Doctor",
         required=True,
         domain=[('license_number', '!=', False)],
     )
@@ -32,7 +31,6 @@ class HrHospitalLibraryVisit(models.Model):
             ('cancelled', 'Cancelled'),
             ('no_show', 'No Show'),
         ],
-        string='Status',
         default='planned',
         required=True,
     )
@@ -48,7 +46,8 @@ class HrHospitalLibraryVisit(models.Model):
         string="Planned Date/Time",
         required=True,
     )
-    actual_datetime = fields.Datetime())
+    actual_datetime = fields.Datetime()
+    diagnosis_ids = fields.One2many(
         comodel_name='medical.diagnosis',
         inverse_name='visit_id',
         string='Diagnoses',
@@ -58,7 +57,6 @@ class HrHospitalLibraryVisit(models.Model):
     )
     recommendations = fields.Html()
     visit_cost = fields.Monetary(
-        string='Visit Cost',
         currency_field='currency_id',
     )
     currency_id = fields.Many2one(
@@ -102,9 +100,10 @@ class HrHospitalLibraryVisit(models.Model):
                 ('planned_datetime', '<=', end_day),
             ])
             if duplicate_count > 0:
-                raise ValidationError(
-                    _("This patient is already scheduled for this doctor today!")
-                )
+                raise ValidationError(_(
+                    "This patient is already scheduled "
+                    "for this doctor today!"
+                ))
 
     @api.onchange('patient_id')
     def _onchange_patient_country_filter(self):

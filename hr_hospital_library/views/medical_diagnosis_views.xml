@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="medical_diagnosis_view_pivot" model="ir.ui.view">
+        <field name="name">medical.diagnosis.pivot</field>
+        <field name="model">medical.diagnosis</field>
+        <field name="arch" type="xml">
+            <pivot string="Diagnosis Analysis">
+                <field name="disease_id" type="row"/>
+                <field name="disease_type_id" type="row"/>
+                <field name="approval_date" interval="month" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="medical_diagnosis_view_graph" model="ir.ui.view">
+        <field name="name">medical.diagnosis.graph</field>
+        <field name="model">medical.diagnosis</field>
+        <field name="arch" type="xml">
+            <graph string="Illness Statistics" type="bar">
+                <field name="disease_type_id"/>
+                <field name="approval_date" interval="month"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_medical_diagnosis_analysis" model="ir.actions.act_window">
+        <field name="name">Diagnosis Analysis</field>
+        <field name="res_model">medical.diagnosis</field>
+        <field name="view_mode">pivot,graph,tree</field>
+    </record>
+</odoo>

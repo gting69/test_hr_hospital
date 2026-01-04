@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <record id="hr_hospital_library_patient_view_search" model="ir.ui.view">
+        <field name="name">hr.hospital.library.patient.search</field>
+        <field name="model">hr.hospital.library.patient</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="display_name" string="Patient Name"
+                       filter_domain="['|', '|', ('first_name', 'ilike', self), ('last_name', 'ilike', self), ('middle_name', 'ilike', self)]"/>
+                <field name="phone"/>
+            </search>
+        </field>
+    </record>
+
     <record id="hr_hospital_library_patient_tree" model="ir.ui.view">
         <field name="name">hr.hospital.library.patient.tree</field>
         <field name="model">hr.hospital.library.patient</field>
@@ -21,6 +33,16 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(hr_hospital_library.action_hr_hospital_library_visit_window)d"
+                                type="action" class="oe_stat_button" icon="fa-calendar"
+                                context="{'search_default_patient_id': active_id, 'default_patient_id': active_id}">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Visits History</span>
+                            </div>
+                        </button>
+                    </div>
+
                     <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_128'}"/>
                     <div class="oe_title">
                         <h1>
@@ -35,6 +57,9 @@
                             <field name="age"/>
                             <field name="gender"/>
                             <field name="personal_doctor_id"/>
+                            <button name="%(hr_hospital_library.action_hr_hospital_library_visit_window)d"
+                                    type="action" string="Quick Visit" class="btn-primary"
+                                    context="{'default_patient_id': active_id, 'default_doctor_id': personal_doctor_id}"/>
                         </group>
                         <group string="Localization &amp; ID">
                             <field name="phone"/>
@@ -55,6 +80,9 @@
                         </group>
                     </group>
                     <notebook>
+                        <page string="Diagnosis History" name="diagnosis_history">
+                            <field name="diagnosis_history_ids" readonly="1"/>
+                        </page>
                         <page string="Allergies" name="allergies">
                             <field name="allergies" placeholder="Describe allergies here..."/>
                         </page>
@@ -71,6 +99,11 @@
         <field name="name">Patients</field>
         <field name="res_model">hr.hospital.library.patient</field>
         <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first patient!
+            </p>
+        </field>
     </record>
 
 </odoo>

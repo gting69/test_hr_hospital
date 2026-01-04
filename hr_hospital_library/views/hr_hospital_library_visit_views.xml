@@ -21,7 +21,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}" statusbar_visible="planned,completed,cancelled"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -63,10 +63,47 @@
         </field>
     </record>
 
+    <record id="hr_hospital_library_visit_calendar" model="ir.ui.view">
+        <field name="name">hr.hospital.library.visit.calendar</field>
+        <field name="model">hr.hospital.library.visit</field>
+        <field name="arch" type="xml">
+            <calendar string="Visits" date_start="planned_datetime" color="doctor_id" mode="month">
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="hr_hospital_library_visit_search" model="ir.ui.view">
+        <field name="name">hr.hospital.library.visit.search</field>
+        <field name="model">hr.hospital.library.visit</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="hr_hospital_library_visit_pivot" model="ir.ui.view">
+        <field name="name">hr.hospital.library.visit.pivot</field>
+        <field name="model">hr.hospital.library.visit</field>
+        <field name="arch" type="xml">
+            <pivot string="Visits Analysis">
+                <field name="doctor_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="planned_datetime" interval="month" type="row"/>
+            </pivot>
+        </field>
+    </record>
+
     <record id="action_hr_hospital_library_visit_window" model="ir.actions.act_window">
         <field name="name">Patient Visits</field>
         <field name="res_model">hr.hospital.library.visit</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,calendar,pivot</field>
     </record>
 
 </odoo>

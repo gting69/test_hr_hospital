@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    <record id="hr_hospital_disease_type_view_search" model="ir.ui.view">
+        <field name="name">hr.hospital.disease.type.search</field>
+        <field name="model">hr.hospital.disease.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <searchpanel>
+                    <field name="parent_id" icon="fa-folder" hierarchy="1" string="Categories"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
     <record id="hr_hospital_disease_type_tree" model="ir.ui.view">
         <field name="name">hr.hospital.disease.type.tree</field>
         <field name="model">hr.hospital.disease.type</field>

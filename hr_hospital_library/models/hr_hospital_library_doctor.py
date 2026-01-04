@@ -55,6 +55,11 @@ class HrHospitalLibraryDoctor(models.Model):
         inverse_name='doctor_id',
         string='Work Schedule',
     )
+    intern_ids = fields.One2many(
+        comodel_name='hr.hospital.library.doctor',
+        inverse_name='mentor_id',
+        string='Interns',
+    )
 
     _sql_constraints = [
         (

@@ -1,5 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    <record id="hr_hospital_library_doctor_view_kanban" model="ir.ui.view">
+        <field name="name">hr.hospital.library.doctor.kanban</field>
+        <field name="model">hr.hospital.library.doctor</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="specialty_id" quick_create="false">
+                <field name="id"/>
+                <field name="display_name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong><field name="display_name"/></strong>
+                                <div><field name="specialty_id"/></div>
+                                <button name="%(hr_hospital_library.action_hr_hospital_library_visit_window)d"
+                                        type="action" class="btn btn-primary btn-sm mt-2"
+                                        context="{'default_doctor_id': active_id}">
+                                    Schedule Visit
+                                </button>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="hr_hospital_library_doctor_view_search" model="ir.ui.view">
+        <field name="name">hr.hospital.library.doctor.search</field>
+        <field name="model">hr.hospital.library.doctor</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="mentors" string="Mentors" domain="[('is_intern', '=', False)]"/>
+                <filter name="interns" string="Interns" domain="[('is_intern', '=', True)]"/>
+            </search>
+        </field>
+    </record>
+
     <record id="hr_hospital_library_doctor_tree" model="ir.ui.view">
         <field name="name">hr.hospital.library.doctor.tree</field>
         <field name="model">hr.hospital.library.doctor</field>
@@ -16,7 +54,7 @@
 
     <record id="hr_hospital_library_doctor_form" model="ir.ui.view">
         <field name="name">hr.hospital.library.doctor.form</field>
-        <field name="model">hr.hospital.library.doctor</field>
+        <field name="model" >hr.hospital.library.doctor</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -57,6 +95,9 @@
                         </group>
                     </group>
                     <notebook>
+                        <page string="Interns" name="interns" invisible="is_intern">
+                            <field name="intern_ids" mode="kanban" readonly="1"/>
+                        </page>
                         <page string="Schedule" name="schedule">
                             <field name="schedule_ids">
                                 <tree editable="bottom">
@@ -79,6 +120,6 @@
     <record id="action_hr_hospital_library_doctor_window" model="ir.actions.act_window">
         <field name="name">Doctors</field>
         <field name="res_model">hr.hospital.library.doctor</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,tree,form</field>
     </record>
 </odoo>

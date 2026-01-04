@@ -38,6 +38,11 @@ class MedicalDiagnosis(models.Model):
     approval_date = fields.Datetime(
         readonly=True,
     )
+    disease_type_id = fields.Many2one(
+        related='disease_id.parent_id',
+        store=True,
+        string='Disease Type'
+    )
     severity = fields.Selection(
         selection=[
             ('mild', 'Mild'),
@@ -45,6 +50,11 @@ class MedicalDiagnosis(models.Model):
             ('severe', 'Severe'),
             ('critical', 'Critical'),
         ],
+    )
+    doctor_id = fields.Many2one(
+        related='visit_id.doctor_id',
+        store=True,
+        string='Doctor'
     )
 
     @api.constrains('approval_date', 'visit_id')

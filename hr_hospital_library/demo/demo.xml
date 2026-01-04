@@ -274,4 +274,91 @@
         <field name="end_hour">18.0</field>
     </record>
 
+    <record id="doc_int_3" model="hr.hospital.library.doctor">
+        <field name="last_name">Petrenko</field>
+        <field name="first_name">Oleg</field>
+        <field name="is_intern">True</field>
+        <field name="mentor_id" ref="doc_3"/>
+        <field name="license_number">I-003</field>
+    </record>
+
+    <record id="doc_int_4" model="hr.hospital.library.doctor">
+        <field name="last_name">Semenov</field>
+        <field name="first_name">Igor</field>
+        <field name="is_intern">True</field>
+        <field name="mentor_id" ref="doc_4"/>
+        <field name="license_number">I-004</field>
+    </record>
+
+    <record id="vis_demo_1" model="hr.hospital.library.visit">
+        <field name="name">Routine Checkup</field>
+        <field name="patient_id" ref="pat_4"/>
+        <field name="doctor_id" ref="doc_1"/>
+        <field name="planned_datetime" eval="(datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d 10:00:00')"/>
+        <field name="state">planned</field>
+    </record>
+
+    <record id="vis_demo_2" model="hr.hospital.library.visit">
+        <field name="name">Consultation</field>
+        <field name="patient_id" ref="pat_5"/>
+        <field name="doctor_id" ref="doc_2"/>
+        <field name="planned_datetime" eval="(datetime.now() + timedelta(days=3)).strftime('%Y-%m-%d 11:30:00')"/>
+        <field name="state">planned</field>
+    </record>
+
+    <record id="vis_demo_3" model="hr.hospital.library.visit">
+        <field name="name">Follow-up</field>
+        <field name="patient_id" ref="pat_6"/>
+        <field name="doctor_id" ref="doc_int_1"/>
+        <field name="planned_datetime" eval="(datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d 09:00:00')"/>
+        <field name="state">completed</field>
+    </record>
+
+    <record id="vis_demo_4" model="hr.hospital.library.visit">
+        <field name="name">Emergency</field>
+        <field name="patient_id" ref="pat_7"/>
+        <field name="doctor_id" ref="doc_5"/>
+        <field name="planned_datetime" eval="datetime.now().strftime('%Y-%m-%d 16:45:00')"/>
+        <field name="state">planned</field>
+    </record>
+
+    <record id="diag_demo_1" model="medical.diagnosis">
+        <field name="visit_id" ref="vis_demo_1"/>
+        <field name="disease_id" ref="dis_asthma"/>
+        <field name="description">Seasonal asthma symptoms</field>
+        <field name="severity">moderate</field>
+    </record>
+
+    <record id="diag_demo_2" model="medical.diagnosis">
+        <field name="visit_id" ref="vis_demo_2"/>
+        <field name="disease_id" ref="dis_migraine"/>
+        <field name="description">Chronic migraine</field>
+        <field name="severity">mild</field>
+    </record>
+
+    <record id="diag_demo_3" model="medical.diagnosis">
+        <field name="visit_id" ref="vis_demo_3"/>
+        <field name="disease_id" ref="dis_flu"/>
+        <field name="approval_date" eval="datetime.now()"/>
+        <field name="is_approved">True</field>
+    </record>
+
+    <record id="diag_demo_4" model="medical.diagnosis">
+        <field name="visit_id" ref="vis_demo_1"/>
+        <field name="disease_id" ref="dis_hyper"/>
+        <field name="description">Initial stages of hypertension</field>
+    </record>
+
+    <record id="diag_demo_5" model="medical.diagnosis">
+        <field name="visit_id" ref="vis_demo_2"/>
+        <field name="disease_id" ref="dis_pneumo"/>
+        <field name="severity">severe</field>
+    </record>
+
+    <record id="diag_demo_6" model="medical.diagnosis">
+        <field name="visit_id" ref="vis_demo_4"/>
+        <field name="disease_id" ref="dis_covid"/>
+        <field name="severity">critical</field>
+    </record>
+
 </odoo>

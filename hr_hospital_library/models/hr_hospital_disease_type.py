@@ -20,7 +20,8 @@ class HrHospitalDiseaseType(models.Model):
         inverse_name='parent_id',
         string='Child Diseases',
     )
-    icd_10_code = fields.Char(size=10)
+    icd_10_code = fields.Char(
+        size=10,
     )
     severity_level = fields.Selection(
         selection=[
@@ -29,7 +30,6 @@ class HrHospitalDiseaseType(models.Model):
             ('high', 'High'),
             ('critical', 'Critical'),
         ],
-        string='Severity Level',
         default='low',
     )
     is_contagious = fields.Boolean(
