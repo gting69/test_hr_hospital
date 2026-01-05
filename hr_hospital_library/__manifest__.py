@@ -32,6 +32,7 @@
         'views/mass_reassign_doctor_wizard_views.xml',
         'views/medical_diagnosis_views.xml',
         'views/disease_report_wizard_views.xml',
+        'report/hr_hospital_doctor_report.xml',
         'views/hr_hospital_library_menu.xml',
     ],
     'demo': [

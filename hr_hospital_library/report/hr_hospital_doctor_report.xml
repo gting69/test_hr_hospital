@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_doctor_card" model="ir.actions.report">
+        <field name="name">Doctor Card with History</field>
+        <field name="model">hr.hospital.library.doctor</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hr_hospital_library.report_doctor_card_template</field>
+        <field name="report_file">hr_hospital_library.report_doctor_card_template</field>
+        <field name="print_report_name">'Doctor_%s' % (object.display_name)</field>
+        <field name="binding_model_id" ref="hr_hospital_library.model_hr_hospital_library_doctor"/>
+        <field name="binding_view_types">form,list</field>
+        <field name="paperformat_id" ref="base.paperformat_euro"/>
+    </record>
+
+    <template id="report_doctor_card_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page" style="page-break-after: always; font-family: sans-serif;">
+                        <div class="oe_structure"/>
+
+                        <div class="text-center" style="border-bottom: 2px solid #333; margin-bottom: 20px; padding-bottom: 10px;">
+                            <h2 style="text-transform: uppercase;"><span t-field="o.last_name"/> <span t-field="o.first_name"/></h2>
+                            <h4 class="text-muted">Specialty: <span t-field="o.specialty_id"/></h4>
+                        </div>
+
+                        <h4 style="color: #2c3e50; border-left: 5px solid #2c3e50; padding-left: 10px;">Visit History</h4>
+                        <table class="table table-bordered table-sm mt-2">
+                            <thead style="background-color: #f8f9fa;">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Patient</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="visits" t-value="request.env['hr.hospital.library.visit'].search([('doctor_id', '=', o.id)], order='planned_datetime desc')"/>
+                                <tr t-foreach="visits" t-as="visit">
+                                    <td><span t-field="visit.planned_datetime"/></td>
+                                    <td><span t-field="visit.patient_id.display_name"/></td>
+                                    <td t-attf-style="font-weight: bold; background-color: #{'#FFFF00' if visit.state == 'planned' else '#90EE90' if visit.state == 'completed' else '#FFCCCB' if visit.state == 'cancelled' else 'transparent'};">
+                                        <span t-field="visit.state"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4 class="mt-4" style="color: #2c3e50; border-left: 5px solid #2c3e50; padding-left: 10px;">Patient Registry</h4>
+                        <table class="table table-sm mt-2">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Gender</th>
+                                    <th>Birth Date</th>
+                                    <th>Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="patients" t-value="request.env['hr.hospital.library.patient'].search([('personal_doctor_id', '=', o.id)])"/>
+                                <tr t-foreach="patients" t-as="p">
+                                    <td><span t-field="p.display_name"/></td>
+                                    <td><span t-field="p.gender"/></td>
+                                    <td><span t-field="p.birth_date"/></td>
+                                    <td><span t-field="p.phone"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="footer">
+                            <div class="row text-center border-top pt-2" style="font-size: 10px;">
+                                <div class="col-6">
+                                    Printed: <span t-field="o.write_date" t-options='{"widget": "datetime"}'/>
+                                </div>
+                                <div class="col-6">
+                                    City: <span t-field="res_company.city"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
