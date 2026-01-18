@@ -2,6 +2,11 @@ from odoo import models, fields
 
 
 class HrHospitalDiseaseType(models.Model):
+    """
+    Модель ієрархічного класифікатора захворювань.
+    Дозволяє групувати хвороби за категоріями, вказувати коди МКХ-10,
+    рівень небезпеки та регіони поширення.
+    """
     _name = 'hr.hospital.disease.type'
     _description = 'Disease Type'
     _parent_name = 'parent_id'

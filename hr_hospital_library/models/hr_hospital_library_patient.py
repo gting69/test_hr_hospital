@@ -5,6 +5,12 @@ _logger = logging.getLogger(__name__)
 
 
 class HrHospitalLibraryPatient(models.Model):
+    """
+    Модель для обліку пацієнтів медичного закладу.
+    Наслідує базову інформацію про особу та додає медичні дані: групу крові,
+    алергії, страхову інформацію, а також автоматично відстежує історію
+    зміни особистого лікаря та встановлених діагнозів.
+    """
     _name = 'hr.hospital.library.patient'
     _description = 'Patient'
     _inherit = ['abstract.person']
@@ -63,6 +69,14 @@ class HrHospitalLibraryPatient(models.Model):
         compute='_compute_display_name',
         search='_search_display_name',
     )
+
+    user_id = fields.Many2one(
+        'res.users',
+        string='Related User',
+        help='User account connected to this patient'
+    )
+
+    user_id = fields.Many2one('res.users', string='Related User')
 
     def _compute_diagnosis_history(self):
         for rec in self:

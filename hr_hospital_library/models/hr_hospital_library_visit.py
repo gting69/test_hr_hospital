@@ -6,6 +6,11 @@ _logger = logging.getLogger(__name__)
 
 
 class HrHospitalLibraryVisit(models.Model):
+    """
+    Модель для реєстрації та управління візитами пацієнтів.
+    Забезпечує контроль станів візиту, запобігає дублюванню записів на один день,
+    реалізує захист даних завершених візитів та інтеграцію з історією діагнозів.
+    """
     _name = 'hr.hospital.library.visit'
     _description = 'Patient Visit'
     _rec_name = 'planned_datetime'

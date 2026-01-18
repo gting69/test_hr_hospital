@@ -5,7 +5,7 @@
     'website': 'https://hr.hospital/',
     'category': 'Customizations',
     'license': 'OPL-1',
-    'version': '17.0.2.1.0',
+    'version': '17.0.2.1.5',
 
     'depends': [
         'base',
@@ -17,6 +17,8 @@
 
     'data': [
 
+        'security/hr_hospital_groups.xml',
+        'security/hr_hospital_security_rules.xml',
         'security/ir.model.access.csv',
 
         'data/hr_hospital_disease_data.xml',
@@ -39,11 +41,13 @@
         'demo/demo.xml',
     ],
 
+    'application': True,
     'installable': True,
     'auto_install': False,
 
     'images': [
-        'static/description/icon.png'
+        'static/description/icon.png',
+        'static/description/index.html',
     ],
 
 }

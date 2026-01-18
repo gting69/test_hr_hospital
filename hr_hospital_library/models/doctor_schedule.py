@@ -2,6 +2,10 @@ from odoo import models, fields
 
 
 class DoctorSchedule(models.Model):
+    """
+    Модель для планування робочого часу лікарів.
+    Дозволяє фіксувати робочі години, відпустки та лікарняні з перевіркою коректності часу.
+    """
     _name = 'doctor.schedule'
     _description = 'Doctor Schedule'
 

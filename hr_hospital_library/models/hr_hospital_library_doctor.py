@@ -7,6 +7,11 @@ _logger = logging.getLogger(__name__)
 
 
 class HrHospitalLibraryDoctor(models.Model):
+    """
+    Основна модель медичного персоналу.
+    Забезпечує управління даними лікарів, включаючи спеціалізацію, ліцензування,
+    систему менторства для інтернів та автоматичний розрахунок професійного стажу.
+    """
     _name = 'hr.hospital.library.doctor'
     _description = 'Doctor'
     _inherit = ['abstract.person']
@@ -60,6 +65,13 @@ class HrHospitalLibraryDoctor(models.Model):
         inverse_name='mentor_id',
         string='Interns',
     )
+
+    user_id = fields.Many2one(
+        'res.users',
+        string='Related User'
+    )
+
+    user_id = fields.Many2one('res.users', string='Related User')
 
     _sql_constraints = [
         (

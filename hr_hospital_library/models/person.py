@@ -5,6 +5,11 @@ from odoo.exceptions import ValidationError
 
 
 class AbstractPerson(models.Model):
+    """
+    Абстрактна модель для зберігання спільних персональних даних.
+    Забезпечує уніфіковану обробку імен, розрахунок віку та валідацію
+    контактних даних (телефон, email) для лікарів, пацієнтів та контактних осіб.
+    """
     _name = 'abstract.person'
     _description = 'Abstract Person'
     _inherit = ['image.mixin']

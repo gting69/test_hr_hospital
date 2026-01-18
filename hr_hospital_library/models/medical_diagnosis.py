@@ -3,6 +3,11 @@ from odoo.exceptions import ValidationError
 
 
 class MedicalDiagnosis(models.Model):
+    """
+    Модель для реєстрації встановлених діагнозів під час візиту.
+    Включає логіку затвердження діагнозу лікарем або його ментором,
+    відстеження призначеного лікування та автоматичну класифікацію за ступенем важкості.
+    """
     _name = 'medical.diagnosis'
     _description = 'Medical Diagnosis'
 

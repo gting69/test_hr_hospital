@@ -2,6 +2,11 @@ from odoo import models, fields, api
 
 
 class PatientDoctorHistory(models.Model):
+    """
+    Модель для логування історії закріплення особистих лікарів за пацієнтами.
+    Автоматично архівує попередні записи при призначенні нового лікаря,
+    зберігаючи дати змін та причини перепризначення.
+    """
     _name = 'patient.doctor.history'
     _description = 'Patient Doctor History'
     _order = 'appointment_date desc'

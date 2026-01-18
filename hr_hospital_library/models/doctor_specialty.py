@@ -2,6 +2,10 @@ from odoo import models, fields
 
 
 class DoctorSpecialty(models.Model):
+    """
+    Модель для класифікації медичних спеціалізацій.
+    Використовується для групування лікарів за напрямками діяльності та кодування професій.
+    """
     _name = 'doctor.specialty'
     _description = 'Doctor Specialty'
 
